@@ -4,8 +4,13 @@ import {connect} from "react-redux";
 import logo from './logo.svg';
 
 class Podcasts extends Component {
+
+    componentWillMount() {
+        this.props.load();
+    }
+
     render() {
-        const {message} = this.props;
+        const {message, podcasts} = this.props;
         return (
             <div className="App">
                 <header className="App-header">
@@ -14,6 +19,9 @@ class Podcasts extends Component {
                 </header>
                 <p className="App-intro">
                     {message}
+                </p>
+                <p className="App-intro">
+                    {podcasts[0].joke}
                 </p>
             </div>
         );

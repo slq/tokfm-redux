@@ -1,7 +1,11 @@
-import {RECEIVED} from "../actionTypes";
+import {LOAD, RECEIVED} from "../actionTypes";
+import {search} from '../api';
 
 const initialState = {
-    message: "Welcome in Tok FM"
+    message: "Welcome in Tok FM",
+    podcasts: [{
+        joke: ''
+    }]
 };
 
 function received(state, action) {
@@ -23,5 +27,10 @@ export function reducer(state = initialState, action) {
 }
 
 export const actions = {
-    fetch: () => ({type: RECEIVED})
+    load: () => dispatch =>
+        search({term: 'dad'}).then(resp => {
+            console.log('response', resp);
+            dispatch({type: RECEIVED, podcasts: resp.data.results});
+        }
+    )
 };
