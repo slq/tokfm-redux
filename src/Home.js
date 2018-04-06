@@ -1,22 +1,19 @@
-import React, {Component} from 'react';
-import {Podcasts} from './Podcasts'
-import logo from './logo.svg';
-import {connect} from "react-redux";
-import {actions} from "./reducers/podcasts";
+import React from 'react';
+import Podcasts from './Podcasts'
+import {Route, Router} from "react-router-dom";
+import createHistory from "history/createBrowserHistory";
 
-function Home(props) {
-    const {message} = props;
+
+const history = createHistory();
+
+history.listen((location, action) => {
+    console.log("History trace", location, action);
+});
+
+export function Home() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <h1 className="App-title">Welcome to React</h1>
-            </header>
-            <p className="App-intro">
-                <Podcasts message={message}/>
-            </p>
-        </div>
+        <Router history={history}>
+            <Route exact path="/" component={Podcasts} />
+        </Router>
     );
 }
-
-export default connect(state => state.podcasts, actions)(Home);
