@@ -2,6 +2,23 @@ import React, {Component} from 'react';
 import {actions} from "./reducers/podcasts";
 import {connect} from "react-redux";
 import logo from './logo.svg';
+import {Podcast} from "./Podcast";
+import styled from "styled-components";
+
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const PodcastList = styled.div`
+  padding: 2rem;
+  background-color: lightgray;
+  width: 50%;
+  height: 100%;
+  margin: 0 auto;
+`;
 
 class Podcasts extends Component {
 
@@ -11,6 +28,7 @@ class Podcasts extends Component {
 
     render() {
         const {message, podcasts} = this.props;
+
         return (
             <div className="App">
                 <header className="App-header">
@@ -20,9 +38,11 @@ class Podcasts extends Component {
                 <p className="App-intro">
                     {message}
                 </p>
-                <p className="App-intro">
-                    {podcasts[0].joke}
-                </p>
+                <Content>
+                    <PodcastList>
+                        {podcasts.map(podcast => <Podcast {...podcast} key={podcast.id}/>)}
+                    </PodcastList>
+                </Content>
             </div>
         );
     }

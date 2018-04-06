@@ -3,9 +3,7 @@ import {fetch} from '../api';
 
 const initialState = {
     message: "Welcome in Tok FM",
-    podcasts: [{
-        joke: ''
-    }]
+    podcasts: []
 };
 
 function received(state, action) {
@@ -29,8 +27,17 @@ export function reducer(state = initialState, action) {
 export const actions = {
     load: () => dispatch =>
         fetch().then(resp => {
-            console.log('response', resp);
-            dispatch({type: RECEIVED, podcasts: resp.data.results});
-        }
-    )
+                const podcasts = resp.data.schedule
+                    .map(podcast => ({
+                        id: podcast.podcast_id,
+                        name: podcast.podcast_name,
+                        series: podcast.series_name,
+                        time: podcast.emission_time
+                    }))
+                    .sort(
+                        (a, b) => b.id - a.id
+                    );
+                dispatch({type: RECEIVED, podcasts});
+            }
+        )
 };
