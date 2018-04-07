@@ -26,8 +26,10 @@ class Podcasts extends Component {
         this.props.load();
     }
 
+    onClick = (podcast) => this.props.download(podcast);
+
     render() {
-        const {message, podcasts} = this.props;
+        const {message, podcasts, downloaded} = this.props;
 
         return (
             <div className="App">
@@ -40,7 +42,13 @@ class Podcasts extends Component {
                 </p>
                 <Content>
                     <PodcastList>
-                        {podcasts.map(podcast => <Podcast {...podcast} key={podcast.id}/>)}
+                        {podcasts.map(podcast => {
+                            let flag = 'false';
+                            if(downloaded.find(id => id === podcast.id)) {
+                                flag = 'tr';
+                            }
+                            return <Podcast {...podcast} flag={flag} key={podcast.id} onClick={this.onClick}/>
+                        })}
                     </PodcastList>
                 </Content>
             </div>

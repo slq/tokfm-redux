@@ -18,12 +18,14 @@ const PodcastDetails = styled.div`
   }
 `;
 
-export function Podcast({id, name, series, time}) {
+export function Podcast({id, name, series, time, flag, onClick}) {
     return (
         <PodcastDetails>
             <i>{series}</i>
             <p>{name}</p>
             <small>{time}</small>
+            <small>{flag}</small>
+            <button onClick={() => onClick({id, time, name, series})} disabled={flag === 'true'}>Download</button>
         </PodcastDetails>
     );
 }
