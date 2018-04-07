@@ -1,3 +1,9 @@
+## TokFM Podcast Downloader with Redux
+
+Current implementation (still in progress).
+
+![TokFM Podcast Downloader](https://raw.githubusercontent.com/slq/tokfm-redux/master/docs/screenshot.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
